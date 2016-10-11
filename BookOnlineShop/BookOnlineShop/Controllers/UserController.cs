@@ -76,6 +76,30 @@ namespace BookOnlineShop.Controllers
             return View(user);
         }
 
+        // GET: User/Login
+        public ActionResult Login() {
+
+            return View();
+        }
+
+        //POST: User/Login
+        [HttpPost]
+        public ActionResult Login(User usr) {
+            var u = db.Users.SingleOrDefault(m => m.username == usr.username && m.password == usr.password);
+            if (u != null) {
+
+                Session["loginSuccess"] = usr;
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
+        // GET: User/Logout
+        public ActionResult Logout() {
+            Session["loginSuccess"] = null;
+            return RedirectToAction("Index", "Home");
+        }
+
         // GET: User/Edit/5
         public ActionResult Edit(int? id)
         {

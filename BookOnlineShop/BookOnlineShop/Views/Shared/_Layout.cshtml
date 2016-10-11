@@ -17,8 +17,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Register", "Create", "User", new { area = "" }, new { @class = "navbar-brand" })
-                @Html.ActionLink("Login", "Login", "User", new { area = "" }, new { @class = "navbar-brand" })
+                @if (@Session["loginSuccess"] != null)
+                {
+                    var u = Session["loginSuccess"] as BookOnlineShop.Models.User;
+                    <div class = "navbar-brand">Hello: @u.username</div>@Html.ActionLink("Logout", "Logout", "User", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else
+                {
+                    @Html.ActionLink("Register", "Create", "User", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Login", "Login", "User", new { area = "" }, new { @class = "navbar-brand" })
+                }
+
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
